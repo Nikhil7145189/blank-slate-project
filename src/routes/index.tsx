@@ -387,8 +387,8 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
     },
   };
 
-  const isAction = kind && ["deploy", "scan", "demo"].includes(kind);
-  const isIntegration = kind && ["github", "jenkins", "postman", "swagger"].includes(kind);
+  const actionKind: "deploy" | "scan" | "demo" | null = isAction ? kind as "deploy" | "scan" | "demo" : null;
+  const integrationKind: "github" | "jenkins" | "postman" | "swagger" | null = isIntegration ? kind as "github" | "jenkins" | "postman" | "swagger" : null;
 
   return (
     <AnimatePresence>
