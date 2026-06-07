@@ -387,6 +387,9 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
     },
   };
 
+  const isAction = kind && ["deploy", "scan", "demo"].includes(kind);
+  const isIntegration = kind && ["github", "jenkins", "postman", "swagger"].includes(kind);
+
   return (
     <AnimatePresence>
       {kind && (
@@ -406,40 +409,79 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
             className="relative w-full max-w-lg border border-border bg-card/80 backdrop-blur-xl"
           >
             <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-bone/50">
-              <span>~/apiguard{kind === "deploy" ? "/agent" : kind === "scan" ? "/scanner" : "/demo"}</span>
+              <span>
+                ~/apiguard
+                {isAction
+                  ? kind === "deploy"
+                    ? "/agent"
+                    : kind === "scan"
+                      ? "/scanner"
+                      : "/demo"
+                  : `/integrations/${kind}`}
+              </span>
               <button onClick={onClose} className="hover:text-acid">[ esc ]</button>
             </div>
             <div className="p-6 space-y-5">
-              <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: config[kind].accent }}>{config[kind].tag}</div>
-              <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{config[kind].title}</h3>
-              <p className="text-bone/60 text-sm leading-relaxed">{config[kind].desc}</p>
-              <form
-                onSubmit={(e) => { e.preventDefault(); onClose(); }}
-                className="space-y-3 font-mono text-xs"
-              >
-                {config[kind].fields.map((f) => (
-                  <label key={f.label} className="block">
-                    <span className="text-bone/40 block mb-1">// {f.label}</span>
-                    <input
-                      defaultValue={f.value}
-                      placeholder={f.placeholder}
-                      className="w-full bg-background/60 border border-bone/20 focus:border-acid outline-none px-3 py-2 text-bone"
-                    />
-                  </label>
-                ))}
-                <div className="flex items-center gap-3 pt-4">
-                  <button
-                    type="submit"
-                    className="border px-5 py-2 uppercase tracking-[0.25em] transition"
-                    style={{ borderColor: config[kind].accent, color: config[kind].accent }}
+              {isAction && kind && (
+                <>
+                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: actionConfig[kind].accent }}>{actionConfig[kind].tag}</div>
+                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{actionConfig[kind].title}</h3>
+                  <p className="text-bone/60 text-sm leading-relaxed">{actionConfig[kind].desc}</p>
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); onClose(); }}
+                    className="space-y-3 font-mono text-xs"
                   >
-                    {config[kind].cta}
-                  </button>
-                  <button type="button" onClick={onClose} className="text-bone/50 hover:text-bone uppercase tracking-[0.25em]">
-                    cancel
-                  </button>
-                </div>
-              </form>
+                    {actionConfig[kind].fields.map((f: { label: string; placeholder: string; value: string }) => (
+                      <label key={f.label} className="block">
+                        <span className="text-bone/40 block mb-1">// {f.label}</span>
+                        <input
+                          defaultValue={f.value}
+                          placeholder={f.placeholder}
+                          className="w-full bg-background/60 border border-bone/20 focus:border-acid outline-none px-3 py-2 text-bone"
+                        />
+                      </label>
+                    ))}
+                    <div className="flex items-center gap-3 pt-4">
+                      <button
+                        type="submit"
+                        className="border px-5 py-2 uppercase tracking-[0.25em] transition"
+                        style={{ borderColor: actionConfig[kind].accent, color: actionConfig[kind].accent }}
+                      >
+                        {actionConfig[kind].cta}
+                      </button>
+                      <button type="button" onClick={onClose} className="text-bone/50 hover:text-bone uppercase tracking-[0.25em]">
+                        cancel
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+              {isIntegration && kind && (
+                <>
+                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: integrationConfig[kind].accent }}>{integrationConfig[kind].tag}</div>
+                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{integrationConfig[kind].title}</h3>
+                  <p className="text-bone/60 text-sm leading-relaxed">{integrationConfig[kind].desc}</p>
+                  <div className="space-y-2 font-mono text-xs">
+                    {integrationConfig[kind].meta.map((m) => (
+                      <div key={m.label} className="flex justify-between border-b border-border/50 py-2">
+                        <span className="text-bone/40">// {m.label}</span>
+                        <span className="text-bone">{m.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {integrationConfig[kind].actions.map((a) => (
+                      <button
+                        key={a}
+                        onClick={onClose}
+                        className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-bone/70 hover:border-acid hover:text-acid transition"
+                      >
+                        {a}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         </motion.div>
