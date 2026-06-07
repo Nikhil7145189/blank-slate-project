@@ -269,7 +269,7 @@ function Index() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4">
+      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4 bg-background/40 backdrop-blur-xl">
         <div>APIGUARD // api.os · built for engineers who don't sleep</div>
         <div className="flex gap-6">
           <span>status: <span className="text-acid">operational</span></span>
