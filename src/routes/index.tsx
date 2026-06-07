@@ -188,7 +188,7 @@ function Index() {
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="relative border-2 p-8 aspect-[3/4] flex flex-col justify-between overflow-hidden"
+              className="relative border-2 p-8 aspect-[3/4] flex flex-col justify-between overflow-hidden bg-card/30 backdrop-blur-xl"
               style={{ borderColor: t.color, background: `radial-gradient(circle at top right, color-mix(in oklab, ${t.color} 15%, transparent), transparent 60%)` }}
             >
               <div className="font-mono text-xs uppercase" style={{ color: t.color }}>TIER {String(i + 1).padStart(2, "0")}</div>
