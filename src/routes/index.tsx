@@ -142,7 +142,7 @@ function Index() {
               <Link
                 to="/module/$slug"
                 params={{ slug: f.slug }}
-                className="relative block border border-border bg-card p-8 h-[280px] overflow-hidden hover:border-acid transition-colors"
+                className="relative block border border-border bg-card/40 backdrop-blur-xl p-8 h-[280px] overflow-hidden hover:border-acid transition-colors"
               >
                 <div className="absolute top-0 right-0 text-[8rem] leading-none text-bone/[0.04] font-display font-bold">
                   {f.code}
