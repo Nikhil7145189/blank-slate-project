@@ -371,7 +371,7 @@ function DashboardMock() {
           </div>
         </div>
         {/* right: health pulse */}
-        <div className="bg-card p-5 space-y-4">
+        <div className="bg-card/30 backdrop-blur-md p-5 space-y-4">
           <div className="font-mono text-[10px] text-bone/40 uppercase">health.pulse</div>
           {[
             { n: "auth-svc", v: 99.99, ms: 42 },
