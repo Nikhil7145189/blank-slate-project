@@ -50,6 +50,7 @@ function Index() {
   const { scrollYProgress } = useScroll();
   const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -200]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const [modal, setModal] = useState<null | "deploy" | "scan" | "demo">(null);
 
   return (
     <div ref={containerRef} className="relative bg-transparent text-foreground">
