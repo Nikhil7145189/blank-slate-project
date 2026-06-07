@@ -515,7 +515,7 @@ function ModulePage() {
 
       {/* CTA + NAV */}
       <section className="max-w-[1400px] mx-auto px-6 py-24">
-        <div className="border border-border bg-card p-10 md:p-16 text-center relative overflow-hidden">
+        <div className="border border-border bg-card/40 backdrop-blur-xl p-10 md:p-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
           <div className="absolute -top-32 -right-32 size-96 rounded-full pointer-events-none"
                style={{ background: `radial-gradient(circle, ${m.accent}, transparent 70%)`, opacity: 0.15 }} />
