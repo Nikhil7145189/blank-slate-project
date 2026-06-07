@@ -261,10 +261,10 @@ function Index() {
           <span className="text-stroke">flinching.</span>
         </motion.h2>
         <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <button className="bg-acid text-ink px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-bone transition">
+          <button onClick={() => setModal("scan")} className="bg-acid text-ink px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-bone transition">
             start.scan()
           </button>
-          <button className="border border-bone/40 text-bone px-8 py-4 font-mono text-sm uppercase tracking-widest hover:border-acid hover:text-acid transition">
+          <button onClick={() => setModal("demo")} className="border border-bone/40 text-bone px-8 py-4 font-mono text-sm uppercase tracking-widest hover:border-acid hover:text-acid transition">
             book.demo()
           </button>
         </div>
