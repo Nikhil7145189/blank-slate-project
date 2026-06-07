@@ -314,7 +314,7 @@ function DashboardMock() {
       </div>
       <div className="grid md:grid-cols-[1fr_2fr_1fr] gap-px bg-border">
         {/* left rail: scan history */}
-        <div className="bg-card p-5 space-y-3">
+        <div className="bg-card/30 backdrop-blur-md p-5 space-y-3">
           <div className="font-mono text-[10px] text-bone/40 uppercase">scan.history</div>
           {["#4192", "#4191", "#4190", "#4189", "#4188", "#4187"].map((id, i) => (
             <div key={id} className="flex items-center justify-between text-xs font-mono border-l-2 pl-3 py-2" style={{ borderColor: i === 0 ? "var(--acid)" : "var(--border)" }}>
