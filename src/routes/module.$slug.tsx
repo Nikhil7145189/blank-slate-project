@@ -411,7 +411,7 @@ function ModulePage() {
       </section>
 
       {/* METRICS STRIP */}
-      <section className="border-y border-border bg-background">
+      <section className="border-y border-border bg-background/40 backdrop-blur-xl">
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
           {m.metrics.map((x, i) => (
             <motion.div
