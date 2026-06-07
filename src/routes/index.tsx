@@ -324,7 +324,7 @@ function DashboardMock() {
           ))}
         </div>
         {/* center: security score + chart */}
-        <div className="bg-card p-8 relative">
+        <div className="bg-card/30 backdrop-blur-md p-8 relative">
           <div className="font-mono text-[10px] text-bone/40 uppercase mb-4">security.score · last 30d</div>
           <div className="flex items-baseline gap-4 mb-6">
             <div className="font-display text-7xl text-acid">94</div>
