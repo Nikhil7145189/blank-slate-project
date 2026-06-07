@@ -493,7 +493,7 @@ function ModulePage() {
             tailing · 5m window
           </div>
         </div>
-        <div className="border border-border bg-card">
+        <div className="border border-border bg-card/40 backdrop-blur-xl">
           <div className="grid grid-cols-[80px_1fr] gap-4 px-6 py-3 border-b border-border font-mono text-[10px] text-bone/40 uppercase tracking-widest">
             <span>t</span><span>event</span>
           </div>
