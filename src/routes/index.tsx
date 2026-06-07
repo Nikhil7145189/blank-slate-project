@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CubeHero } from "@/components/site/CubeHero";
 import { TiltCard } from "@/components/site/TiltCard";
