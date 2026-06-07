@@ -384,7 +384,7 @@ function ModulePage() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ delay: 0.3, duration: 0.7 }}
               style={{ transformPerspective: 1200 }}
-              className="border border-border bg-card/80 backdrop-blur-xl p-5 font-mono text-[11px] space-y-1.5"
+              className="border border-border bg-card/40 backdrop-blur-xl p-5 font-mono text-[11px] space-y-1.5"
             >
               <div className="flex items-center justify-between text-bone/40 uppercase text-[10px] pb-2 border-b border-border mb-2">
                 <span>~/apiguard · {m.tag}</span>
