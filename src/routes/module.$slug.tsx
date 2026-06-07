@@ -438,7 +438,7 @@ function ModulePage() {
             {m.body}
           </p>
         </div>
-        <div className="border border-border bg-card p-6">
+        <div className="border border-border bg-card/40 backdrop-blur-xl p-6">
           <div className="font-mono text-[10px] text-bone/40 uppercase tracking-widest mb-4">ops.config</div>
           <div className="space-y-3 font-mono text-xs">
             {m.ops.map((o) => (
