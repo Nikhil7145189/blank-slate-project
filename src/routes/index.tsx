@@ -301,7 +301,7 @@ function DashboardMock() {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 1 }}
       style={{ transformPerspective: 1400 }}
-      className="mt-12 border border-border bg-card overflow-hidden"
+      className="mt-12 border border-border bg-card/40 backdrop-blur-xl overflow-hidden"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] text-bone/50 uppercase">
         <div className="flex gap-1.5">
