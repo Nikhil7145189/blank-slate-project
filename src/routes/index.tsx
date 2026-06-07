@@ -112,7 +112,7 @@ function Index() {
         </div>
 
         {/* Marquee strip */}
-        <div className="absolute bottom-0 inset-x-0 border-t border-border bg-background/80 overflow-hidden">
+        <div className="absolute bottom-0 inset-x-0 border-t border-border bg-background/40 backdrop-blur-xl overflow-hidden">
           <div className="flex marquee-track whitespace-nowrap py-3 font-mono text-sm uppercase">
             {Array.from({ length: 2 }).map((_, k) => (
               <div key={k} className="flex shrink-0">
