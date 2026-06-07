@@ -547,7 +547,7 @@ function ModulePage() {
           <Link
             to="/module/$slug"
             params={{ slug: prev }}
-            className="bg-card p-6 group hover:bg-bone/[0.02] transition-colors"
+            className="bg-card/40 backdrop-blur-xl p-6 group hover:bg-bone/[0.02] transition-colors"
           >
             <div className="font-mono text-[10px] text-bone/40 uppercase mb-2">← prev module</div>
             <div className="font-display text-2xl uppercase group-hover:text-acid transition-colors">
@@ -557,7 +557,7 @@ function ModulePage() {
           <Link
             to="/module/$slug"
             params={{ slug: next }}
-            className="bg-card p-6 group hover:bg-bone/[0.02] transition-colors text-right"
+            className="bg-card/40 backdrop-blur-xl p-6 group hover:bg-bone/[0.02] transition-colors text-right"
           >
             <div className="font-mono text-[10px] text-bone/40 uppercase mb-2">next module →</div>
             <div className="font-display text-2xl uppercase group-hover:text-acid transition-colors">
@@ -567,7 +567,7 @@ function ModulePage() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4">
+      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4 bg-background/40 backdrop-blur-xl">
         <div>APIGUARD // mod.{m.code} · {m.tag}</div>
         <div className="flex gap-6">
           <span>status: <span style={{ color: m.accent }}>operational</span></span>
