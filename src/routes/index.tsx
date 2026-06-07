@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CubeHero } from "@/components/site/CubeHero";
 import { TiltCard } from "@/components/site/TiltCard";
@@ -50,6 +50,7 @@ function Index() {
   const { scrollYProgress } = useScroll();
   const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -200]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const [modal, setModal] = useState<null | "deploy" | "scan" | "demo">(null);
 
   return (
     <div ref={containerRef} className="relative bg-transparent text-foreground">
@@ -68,7 +69,7 @@ function Index() {
             <a href="#load" className="hover:text-acid">load</a>
             <a href="#changes" className="hover:text-acid">radar</a>
           </nav>
-          <button className="border border-acid text-acid px-3 py-1 hover:bg-acid hover:text-ink transition">
+          <button onClick={() => setModal("deploy")} className="border border-acid text-acid px-3 py-1 hover:bg-acid hover:text-ink transition">
             deploy_agent →
           </button>
         </div>
@@ -260,10 +261,10 @@ function Index() {
           <span className="text-stroke">flinching.</span>
         </motion.h2>
         <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <button className="bg-acid text-ink px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-bone transition">
+          <button onClick={() => setModal("scan")} className="bg-acid text-ink px-8 py-4 font-mono text-sm uppercase tracking-widest hover:bg-bone transition">
             start.scan()
           </button>
-          <button className="border border-bone/40 text-bone px-8 py-4 font-mono text-sm uppercase tracking-widest hover:border-acid hover:text-acid transition">
+          <button onClick={() => setModal("demo")} className="border border-bone/40 text-bone px-8 py-4 font-mono text-sm uppercase tracking-widest hover:border-acid hover:text-acid transition">
             book.demo()
           </button>
         </div>
@@ -277,7 +278,110 @@ function Index() {
           <span>© 2026</span>
         </div>
       </footer>
+
+      <ActionModal kind={modal} onClose={() => setModal(null)} />
     </div>
+  );
+}
+
+function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo"; onClose: () => void }) {
+  const config = {
+    deploy: {
+      tag: "[ agent.deploy ]",
+      title: "Deploy Edge Agent",
+      desc: "Drop a lightweight sentinel into your cluster. Auto-discovers endpoints, streams telemetry back to apiguard.os in under 60 seconds.",
+      fields: [
+        { label: "cluster.name", placeholder: "prod-us-east-1", value: "" },
+        { label: "runtime", placeholder: "kubernetes | ecs | nomad | docker", value: "kubernetes" },
+        { label: "region", placeholder: "global·edge", value: "us-east-1" },
+      ],
+      cta: "▶ deploy_agent",
+      accent: "var(--acid)",
+    },
+    scan: {
+      tag: "[ scan.initiate ]",
+      title: "Start Surface Scan",
+      desc: "Aim at a base URL or upload an OpenAPI spec. Full CVE + OWASP-API top-10 sweep typically completes in ~90 seconds.",
+      fields: [
+        { label: "target.url", placeholder: "https://api.acme.io", value: "" },
+        { label: "depth", placeholder: "shallow | standard | deep", value: "standard" },
+        { label: "auth.token", placeholder: "Bearer ••••••••", value: "" },
+      ],
+      cta: "▶ start.scan()",
+      accent: "var(--acid)",
+    },
+    demo: {
+      tag: "[ demo.book ]",
+      title: "Book a Live Demo",
+      desc: "30 minutes with an engineer. Bring your real API — we'll scan it, mock it, and stress it together.",
+      fields: [
+        { label: "name", placeholder: "Ada Lovelace", value: "" },
+        { label: "work.email", placeholder: "ada@yourco.com", value: "" },
+        { label: "company", placeholder: "Yourco Inc.", value: "" },
+      ],
+      cta: "▶ confirm.slot",
+      accent: "var(--signal)",
+    },
+  } as const;
+
+  return (
+    <AnimatePresence>
+      {kind && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[100] bg-ink/70 backdrop-blur-md flex items-center justify-center p-6"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            transition={{ duration: 0.18 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg border border-border bg-card/80 backdrop-blur-xl"
+          >
+            <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-bone/50">
+              <span>~/apiguard{kind === "deploy" ? "/agent" : kind === "scan" ? "/scanner" : "/demo"}</span>
+              <button onClick={onClose} className="hover:text-acid">[ esc ]</button>
+            </div>
+            <div className="p-6 space-y-5">
+              <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: config[kind].accent }}>{config[kind].tag}</div>
+              <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{config[kind].title}</h3>
+              <p className="text-bone/60 text-sm leading-relaxed">{config[kind].desc}</p>
+              <form
+                onSubmit={(e) => { e.preventDefault(); onClose(); }}
+                className="space-y-3 font-mono text-xs"
+              >
+                {config[kind].fields.map((f) => (
+                  <label key={f.label} className="block">
+                    <span className="text-bone/40 block mb-1">// {f.label}</span>
+                    <input
+                      defaultValue={f.value}
+                      placeholder={f.placeholder}
+                      className="w-full bg-background/60 border border-bone/20 focus:border-acid outline-none px-3 py-2 text-bone"
+                    />
+                  </label>
+                ))}
+                <div className="flex items-center gap-3 pt-4">
+                  <button
+                    type="submit"
+                    className="border px-5 py-2 uppercase tracking-[0.25em] transition"
+                    style={{ borderColor: config[kind].accent, color: config[kind].accent }}
+                  >
+                    {config[kind].cta}
+                  </button>
+                  <button type="button" onClick={onClose} className="text-bone/50 hover:text-bone uppercase tracking-[0.25em]">
+                    cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
