@@ -106,7 +106,7 @@ function TestSynthPage() {
 
         {/* SPEC INTAKE */}
         <div className="relative mt-20 px-6 max-w-[1400px] mx-auto pb-24">
-          <div className="border border-border bg-card/70 backdrop-blur-xl">
+          <div className="border border-border bg-card/40 backdrop-blur-xl">
             <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-bone/50">
               <span>~/apiguard/ai/test-synth · intake</span>
               <span className="flex gap-1">
@@ -157,7 +157,7 @@ function TestSynthPage() {
       </section>
 
       {/* PIPELINE STRIP */}
-      <section className="relative border-y border-border bg-card/40 overflow-hidden">
+      <section className="relative border-y border-border bg-card/30 backdrop-blur-xl overflow-hidden">
         <div className="flex marquee-track whitespace-nowrap py-4 font-mono text-xs uppercase tracking-[0.3em] text-bone/40">
           {[...PIPELINE, ...PIPELINE, ...PIPELINE].map((p, i) => (
             <span key={i} className="px-8 flex items-center gap-3">
@@ -192,7 +192,7 @@ function TestSynthPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.06 }}
-                className="relative border border-border bg-card p-6 h-full overflow-hidden"
+                className="relative border border-border bg-card/40 backdrop-blur-xl p-6 h-full overflow-hidden"
               >
                 <div className="absolute top-0 right-0 font-mono text-[10rem] leading-none text-bone/[0.03] select-none">{c.code}</div>
                 <div className="relative flex items-start justify-between mb-8">
@@ -213,7 +213,7 @@ function TestSynthPage() {
 
       {/* CODE PREVIEW */}
       <section className="relative px-6 max-w-[1400px] mx-auto pb-32">
-        <div className="grid md:grid-cols-[1fr_1.4fr] gap-0 border border-border bg-card/70">
+        <div className="grid md:grid-cols-[1fr_1.4fr] gap-0 border border-border bg-card/40 backdrop-blur-xl">
           <div className="p-10 border-r border-border">
             <div className="font-mono text-xs text-signal uppercase tracking-[0.3em] mb-4">[ 03 · emit ]</div>
             <h3 className="font-display text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] mb-6">framework-native. no glue.</h3>
@@ -272,7 +272,7 @@ describe.each([
         <div className="font-mono text-xs text-signal uppercase tracking-[0.3em] mb-3">[ 04 · risk.matrix ]</div>
         <h2 className="font-display text-5xl md:text-6xl uppercase tracking-tighter leading-[0.9] mb-10">what broke first.</h2>
 
-        <div className="border border-border bg-card/50">
+        <div className="border border-border bg-card/40 backdrop-blur-xl">
           <div className="grid grid-cols-[80px_1fr_120px_120px_100px] font-mono text-[10px] uppercase tracking-widest text-bone/40 border-b border-border">
             <div className="p-3">class</div>
             <div className="p-3">endpoint</div>
@@ -317,7 +317,7 @@ describe.each([
       </section>
 
       {/* FOOTER NAV */}
-      <section className="border-t border-border bg-card/30">
+      <section className="border-t border-border bg-card/30 backdrop-blur-xl">
         <div className="max-w-[1400px] mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
           <div>
             <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">previous module</div>
