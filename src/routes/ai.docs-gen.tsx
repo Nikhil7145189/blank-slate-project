@@ -56,7 +56,7 @@ function DocsGenPage() {
   const [running, setRunning] = useState(false);
 
   return (
-    <div className="relative bg-background text-foreground">
+    <div className="relative bg-transparent text-foreground">
       {/* TOP RAIL */}
       <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <div className="flex items-center justify-between px-6 py-3 font-mono text-xs tracking-widest uppercase">
@@ -107,7 +107,7 @@ function DocsGenPage() {
 
         {/* INTAKE */}
         <div className="relative mt-20 px-6 max-w-[1400px] mx-auto pb-24">
-          <div className="border border-border bg-card/70 backdrop-blur-xl">
+          <div className="border border-border bg-card/40 backdrop-blur-xl">
             <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-bone/50">
               <span>~/apiguard/ai/docs-gen · intake</span>
               <span className="flex gap-1">
@@ -166,7 +166,7 @@ function DocsGenPage() {
       </section>
 
       {/* PIPELINE STRIP */}
-      <section className="relative border-y border-border bg-card/40 overflow-hidden">
+      <section className="relative border-y border-border bg-card/30 backdrop-blur-xl overflow-hidden">
         <div className="flex marquee-track whitespace-nowrap py-4 font-mono text-xs uppercase tracking-[0.3em] text-bone/40">
           {[...PIPELINE, ...PIPELINE, ...PIPELINE].map((p, i) => (
             <span key={i} className="px-8 flex items-center gap-3">
@@ -202,7 +202,7 @@ function DocsGenPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.06 }}
-                className="relative border border-border bg-card p-6 h-full overflow-hidden"
+                className="relative border border-border bg-card/40 backdrop-blur-xl p-6 h-full overflow-hidden"
               >
                 <div className="absolute top-0 right-0 font-mono text-[10rem] leading-none text-bone/[0.03] select-none">{s.code}</div>
                 <div className="relative flex items-start justify-between mb-8">
@@ -223,7 +223,7 @@ function DocsGenPage() {
 
       {/* PREVIEW PANE */}
       <section className="relative px-6 max-w-[1400px] mx-auto pb-32">
-        <div className="grid md:grid-cols-[1fr_1.4fr] gap-0 border border-border bg-card/70">
+        <div className="grid md:grid-cols-[1fr_1.4fr] gap-0 border border-border bg-card/40 backdrop-blur-xl">
           <div className="p-10 border-r border-border">
             <div className="font-mono text-xs text-acid uppercase tracking-[0.3em] mb-4">[ 03 · emit ]</div>
             <h3 className="font-display text-4xl md:text-5xl uppercase tracking-tighter leading-[0.9] mb-6">readable. linkable. printable.</h3>
@@ -281,7 +281,7 @@ curl -X POST https://api.acme.io/v3/checkout/express \\
       </section>
 
       {/* FOOTER NAV */}
-      <section className="border-t border-border bg-card/30">
+      <section className="border-t border-border bg-card/30 backdrop-blur-xl">
         <div className="max-w-[1400px] mx-auto px-6 py-16 grid md:grid-cols-3 gap-8">
           <div>
             <div className="font-mono text-xs text-bone/40 uppercase tracking-widest mb-2">return</div>

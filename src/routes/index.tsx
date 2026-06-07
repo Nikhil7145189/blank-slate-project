@@ -52,7 +52,7 @@ function Index() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <div ref={containerRef} className="relative bg-background text-foreground">
+    <div ref={containerRef} className="relative bg-transparent text-foreground">
       {/* TOP RAIL */}
       <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <div className="flex items-center justify-between px-6 py-3 font-mono text-xs tracking-widest uppercase">
@@ -112,7 +112,7 @@ function Index() {
         </div>
 
         {/* Marquee strip */}
-        <div className="absolute bottom-0 inset-x-0 border-t border-border bg-background/80 overflow-hidden">
+        <div className="absolute bottom-0 inset-x-0 border-t border-border bg-background/40 backdrop-blur-xl overflow-hidden">
           <div className="flex marquee-track whitespace-nowrap py-3 font-mono text-sm uppercase">
             {Array.from({ length: 2 }).map((_, k) => (
               <div key={k} className="flex shrink-0">
@@ -142,7 +142,7 @@ function Index() {
               <Link
                 to="/module/$slug"
                 params={{ slug: f.slug }}
-                className="relative block border border-border bg-card p-8 h-[280px] overflow-hidden hover:border-acid transition-colors"
+                className="relative block border border-border bg-card/40 backdrop-blur-xl p-8 h-[280px] overflow-hidden hover:border-acid transition-colors"
               >
                 <div className="absolute top-0 right-0 text-[8rem] leading-none text-bone/[0.04] font-display font-bold">
                   {f.code}
@@ -188,7 +188,7 @@ function Index() {
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: i * 0.12 }}
-              className="relative border-2 p-8 aspect-[3/4] flex flex-col justify-between overflow-hidden"
+              className="relative border-2 p-8 aspect-[3/4] flex flex-col justify-between overflow-hidden bg-card/30 backdrop-blur-xl"
               style={{ borderColor: t.color, background: `radial-gradient(circle at top right, color-mix(in oklab, ${t.color} 15%, transparent), transparent 60%)` }}
             >
               <div className="font-mono text-xs uppercase" style={{ color: t.color }}>TIER {String(i + 1).padStart(2, "0")}</div>
@@ -209,7 +209,7 @@ function Index() {
       {/* CHANGE RADAR */}
       <section id="changes" className="relative px-6 py-32 max-w-[1400px] mx-auto">
         <SectionHead n="04" label="diff.radar" title="The world's most paranoid changelog." />
-        <div className="mt-12 border border-border bg-card">
+        <div className="mt-12 border border-border bg-card/40 backdrop-blur-xl">
           <div className="grid grid-cols-[100px_1fr_120px] gap-4 px-6 py-3 border-b border-border font-mono text-[10px] text-bone/40 uppercase tracking-widest">
             <span>event</span><span>endpoint</span><span className="text-right">timestamp</span>
           </div>
@@ -269,7 +269,7 @@ function Index() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4">
+      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4 bg-background/40 backdrop-blur-xl">
         <div>APIGUARD // api.os · built for engineers who don't sleep</div>
         <div className="flex gap-6">
           <span>status: <span className="text-acid">operational</span></span>
@@ -301,7 +301,7 @@ function DashboardMock() {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 1 }}
       style={{ transformPerspective: 1400 }}
-      className="mt-12 border border-border bg-card overflow-hidden"
+      className="mt-12 border border-border bg-card/40 backdrop-blur-xl overflow-hidden"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-2 font-mono text-[10px] text-bone/50 uppercase">
         <div className="flex gap-1.5">
@@ -314,7 +314,7 @@ function DashboardMock() {
       </div>
       <div className="grid md:grid-cols-[1fr_2fr_1fr] gap-px bg-border">
         {/* left rail: scan history */}
-        <div className="bg-card p-5 space-y-3">
+        <div className="bg-card/30 backdrop-blur-md p-5 space-y-3">
           <div className="font-mono text-[10px] text-bone/40 uppercase">scan.history</div>
           {["#4192", "#4191", "#4190", "#4189", "#4188", "#4187"].map((id, i) => (
             <div key={id} className="flex items-center justify-between text-xs font-mono border-l-2 pl-3 py-2" style={{ borderColor: i === 0 ? "var(--acid)" : "var(--border)" }}>
@@ -324,7 +324,7 @@ function DashboardMock() {
           ))}
         </div>
         {/* center: security score + chart */}
-        <div className="bg-card p-8 relative">
+        <div className="bg-card/30 backdrop-blur-md p-8 relative">
           <div className="font-mono text-[10px] text-bone/40 uppercase mb-4">security.score · last 30d</div>
           <div className="flex items-baseline gap-4 mb-6">
             <div className="font-display text-7xl text-acid">94</div>
@@ -371,7 +371,7 @@ function DashboardMock() {
           </div>
         </div>
         {/* right: health pulse */}
-        <div className="bg-card p-5 space-y-4">
+        <div className="bg-card/30 backdrop-blur-md p-5 space-y-4">
           <div className="font-mono text-[10px] text-bone/40 uppercase">health.pulse</div>
           {[
             { n: "auth-svc", v: 99.99, ms: 42 },

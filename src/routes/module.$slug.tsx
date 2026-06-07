@@ -311,7 +311,7 @@ function ModulePage() {
   const next = ORDER[(idx + 1) % ORDER.length];
 
   return (
-    <div className="relative bg-background text-foreground min-h-screen">
+    <div className="relative bg-transparent text-foreground min-h-screen">
       {/* TOP RAIL */}
       <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <div className="flex items-center justify-between px-6 py-3 font-mono text-xs tracking-widest uppercase">
@@ -384,7 +384,7 @@ function ModulePage() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               transition={{ delay: 0.3, duration: 0.7 }}
               style={{ transformPerspective: 1200 }}
-              className="border border-border bg-card/80 backdrop-blur-xl p-5 font-mono text-[11px] space-y-1.5"
+              className="border border-border bg-card/40 backdrop-blur-xl p-5 font-mono text-[11px] space-y-1.5"
             >
               <div className="flex items-center justify-between text-bone/40 uppercase text-[10px] pb-2 border-b border-border mb-2">
                 <span>~/apiguard · {m.tag}</span>
@@ -411,7 +411,7 @@ function ModulePage() {
       </section>
 
       {/* METRICS STRIP */}
-      <section className="border-y border-border bg-background">
+      <section className="border-y border-border bg-background/40 backdrop-blur-xl">
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
           {m.metrics.map((x, i) => (
             <motion.div
@@ -438,7 +438,7 @@ function ModulePage() {
             {m.body}
           </p>
         </div>
-        <div className="border border-border bg-card p-6">
+        <div className="border border-border bg-card/40 backdrop-blur-xl p-6">
           <div className="font-mono text-[10px] text-bone/40 uppercase tracking-widest mb-4">ops.config</div>
           <div className="space-y-3 font-mono text-xs">
             {m.ops.map((o) => (
@@ -468,7 +468,7 @@ function ModulePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1 }}
-              className="bg-card p-8 group hover:bg-bone/[0.02] transition-colors"
+              className="bg-card/40 backdrop-blur-xl p-8 group hover:bg-bone/[0.02] transition-colors"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="font-mono text-xs text-bone/40">CAP.{String(i + 1).padStart(2, "0")}</div>
@@ -493,7 +493,7 @@ function ModulePage() {
             tailing · 5m window
           </div>
         </div>
-        <div className="border border-border bg-card">
+        <div className="border border-border bg-card/40 backdrop-blur-xl">
           <div className="grid grid-cols-[80px_1fr] gap-4 px-6 py-3 border-b border-border font-mono text-[10px] text-bone/40 uppercase tracking-widest">
             <span>t</span><span>event</span>
           </div>
@@ -515,7 +515,7 @@ function ModulePage() {
 
       {/* CTA + NAV */}
       <section className="max-w-[1400px] mx-auto px-6 py-24">
-        <div className="border border-border bg-card p-10 md:p-16 text-center relative overflow-hidden">
+        <div className="border border-border bg-card/40 backdrop-blur-xl p-10 md:p-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
           <div className="absolute -top-32 -right-32 size-96 rounded-full pointer-events-none"
                style={{ background: `radial-gradient(circle, ${m.accent}, transparent 70%)`, opacity: 0.15 }} />
@@ -547,7 +547,7 @@ function ModulePage() {
           <Link
             to="/module/$slug"
             params={{ slug: prev }}
-            className="bg-card p-6 group hover:bg-bone/[0.02] transition-colors"
+            className="bg-card/40 backdrop-blur-xl p-6 group hover:bg-bone/[0.02] transition-colors"
           >
             <div className="font-mono text-[10px] text-bone/40 uppercase mb-2">← prev module</div>
             <div className="font-display text-2xl uppercase group-hover:text-acid transition-colors">
@@ -557,7 +557,7 @@ function ModulePage() {
           <Link
             to="/module/$slug"
             params={{ slug: next }}
-            className="bg-card p-6 group hover:bg-bone/[0.02] transition-colors text-right"
+            className="bg-card/40 backdrop-blur-xl p-6 group hover:bg-bone/[0.02] transition-colors text-right"
           >
             <div className="font-mono text-[10px] text-bone/40 uppercase mb-2">next module →</div>
             <div className="font-display text-2xl uppercase group-hover:text-acid transition-colors">
@@ -567,7 +567,7 @@ function ModulePage() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4">
+      <footer className="border-t border-border px-6 py-8 font-mono text-xs text-bone/40 flex flex-wrap items-center justify-between gap-4 bg-background/40 backdrop-blur-xl">
         <div>APIGUARD // mod.{m.code} · {m.tag}</div>
         <div className="flex gap-6">
           <span>status: <span style={{ color: m.accent }}>operational</span></span>
