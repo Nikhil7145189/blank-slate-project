@@ -424,16 +424,16 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
               <button onClick={onClose} className="hover:text-acid">[ esc ]</button>
             </div>
             <div className="p-6 space-y-5">
-              {isAction && kind && (
+              {isAction && actionKind && (
                 <>
-                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: actionConfig[kind].accent }}>{actionConfig[kind].tag}</div>
-                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{actionConfig[kind].title}</h3>
-                  <p className="text-bone/60 text-sm leading-relaxed">{actionConfig[kind].desc}</p>
+                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: actionConfig[actionKind].accent }}>{actionConfig[actionKind].tag}</div>
+                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{actionConfig[actionKind].title}</h3>
+                  <p className="text-bone/60 text-sm leading-relaxed">{actionConfig[actionKind].desc}</p>
                   <form
                     onSubmit={(e) => { e.preventDefault(); onClose(); }}
                     className="space-y-3 font-mono text-xs"
                   >
-                    {actionConfig[kind].fields.map((f: { label: string; placeholder: string; value: string }) => (
+                    {actionConfig[actionKind].fields.map((f: { label: string; placeholder: string; value: string }) => (
                       <label key={f.label} className="block">
                         <span className="text-bone/40 block mb-1">// {f.label}</span>
                         <input
@@ -447,9 +447,9 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
                       <button
                         type="submit"
                         className="border px-5 py-2 uppercase tracking-[0.25em] transition"
-                        style={{ borderColor: actionConfig[kind].accent, color: actionConfig[kind].accent }}
+                        style={{ borderColor: actionConfig[actionKind].accent, color: actionConfig[actionKind].accent }}
                       >
-                        {actionConfig[kind].cta}
+                        {actionConfig[actionKind].cta}
                       </button>
                       <button type="button" onClick={onClose} className="text-bone/50 hover:text-bone uppercase tracking-[0.25em]">
                         cancel
@@ -458,13 +458,13 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
                   </form>
                 </>
               )}
-              {isIntegration && kind && (
+              {isIntegration && integrationKind && (
                 <>
-                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: integrationConfig[kind].accent }}>{integrationConfig[kind].tag}</div>
-                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{integrationConfig[kind].title}</h3>
-                  <p className="text-bone/60 text-sm leading-relaxed">{integrationConfig[kind].desc}</p>
+                  <div className="font-mono text-xs uppercase tracking-[0.3em]" style={{ color: integrationConfig[integrationKind].accent }}>{integrationConfig[integrationKind].tag}</div>
+                  <h3 className="font-display text-3xl md:text-4xl uppercase tracking-tighter leading-[0.95]">{integrationConfig[integrationKind].title}</h3>
+                  <p className="text-bone/60 text-sm leading-relaxed">{integrationConfig[integrationKind].desc}</p>
                   <div className="space-y-2 font-mono text-xs">
-                    {integrationConfig[kind].meta.map((m) => (
+                    {integrationConfig[integrationKind].meta.map((m) => (
                       <div key={m.label} className="flex justify-between border-b border-border/50 py-2">
                         <span className="text-bone/40">// {m.label}</span>
                         <span className="text-bone">{m.value}</span>
@@ -472,7 +472,7 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-2 pt-2">
-                    {integrationConfig[kind].actions.map((a) => (
+                    {integrationConfig[integrationKind].actions.map((a) => (
                       <button
                         key={a}
                         onClick={onClose}
