@@ -209,7 +209,7 @@ function Index() {
       {/* CHANGE RADAR */}
       <section id="changes" className="relative px-6 py-32 max-w-[1400px] mx-auto">
         <SectionHead n="04" label="diff.radar" title="The world's most paranoid changelog." />
-        <div className="mt-12 border border-border bg-card">
+        <div className="mt-12 border border-border bg-card/40 backdrop-blur-xl">
           <div className="grid grid-cols-[100px_1fr_120px] gap-4 px-6 py-3 border-b border-border font-mono text-[10px] text-bone/40 uppercase tracking-widest">
             <span>event</span><span>endpoint</span><span className="text-right">timestamp</span>
           </div>
