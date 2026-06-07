@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ModuleSlugRouteImport } from './routes/module.$slug'
+import { Route as AiTestSynthRouteImport } from './routes/ai.test-synth'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ModuleSlugRoute = ModuleSlugRouteImport.update({
+  id: '/module/$slug',
+  path: '/module/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiTestSynthRoute = AiTestSynthRouteImport.update({
+  id: '/ai/test-synth',
+  path: '/ai/test-synth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai/test-synth': typeof AiTestSynthRoute
+  '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai/test-synth': typeof AiTestSynthRoute
+  '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai/test-synth': typeof AiTestSynthRoute
+  '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ai/test-synth' | '/module/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ai/test-synth' | '/module/$slug'
+  id: '__root__' | '/' | '/ai/test-synth' | '/module/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiTestSynthRoute: typeof AiTestSynthRoute
+  ModuleSlugRoute: typeof ModuleSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/module/$slug': {
+      id: '/module/$slug'
+      path: '/module/$slug'
+      fullPath: '/module/$slug'
+      preLoaderRoute: typeof ModuleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/test-synth': {
+      id: '/ai/test-synth'
+      path: '/ai/test-synth'
+      fullPath: '/ai/test-synth'
+      preLoaderRoute: typeof AiTestSynthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiTestSynthRoute: AiTestSynthRoute,
+  ModuleSlugRoute: ModuleSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
