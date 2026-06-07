@@ -238,11 +238,19 @@ function Index() {
         </div>
         <div className="flex marquee-track gap-16 font-display text-5xl md:text-7xl uppercase whitespace-nowrap">
           {Array.from({ length: 2 }).map((_, k) =>
-            ["GitHub", "Jenkins", "Postman", "Swagger", "OpenAPI", "k6", "Datadog", "Slack", "PagerDuty"].map((b) => (
-              <span key={b + k} className="text-bone/20 hover:text-acid transition-colors flex items-center gap-16">
-                {b} <span className="text-acid/40">/</span>
-              </span>
-            ))
+            ["GitHub", "Jenkins", "Postman", "Swagger", "OpenAPI", "k6", "Datadog", "Slack", "PagerDuty"].map((b) => {
+              const clickable = ["GitHub", "Jenkins", "Postman", "Swagger"].includes(b);
+              const kindMap: Record<string, "github" | "jenkins" | "postman" | "swagger"> = { GitHub: "github", Jenkins: "jenkins", Postman: "postman", Swagger: "swagger" };
+              return (
+                <button
+                  key={b + k}
+                  onClick={() => clickable && setModal(kindMap[b])}
+                  className={`text-bone/20 hover:text-acid transition-colors flex items-center gap-16 ${clickable ? "cursor-pointer" : "cursor-default"}`}
+                >
+                  {b} <span className="text-acid/40">/</span>
+                </button>
+              );
+            })
           )}
         </div>
       </section>
