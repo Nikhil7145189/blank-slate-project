@@ -69,7 +69,7 @@ function Index() {
             <a href="#load" className="hover:text-acid">load</a>
             <a href="#changes" className="hover:text-acid">radar</a>
           </nav>
-          <button className="border border-acid text-acid px-3 py-1 hover:bg-acid hover:text-ink transition">
+          <button onClick={() => setModal("deploy")} className="border border-acid text-acid px-3 py-1 hover:bg-acid hover:text-ink transition">
             deploy_agent →
           </button>
         </div>
