@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ModuleSlugRouteImport } from './routes/module.$slug'
 import { Route as AiTestSynthRouteImport } from './routes/ai.test-synth'
+import { Route as AiMockServerRouteImport } from './routes/ai.mock-server'
+import { Route as AiDocsGenRouteImport } from './routes/ai.docs-gen'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,33 +30,67 @@ const AiTestSynthRoute = AiTestSynthRouteImport.update({
   path: '/ai/test-synth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiMockServerRoute = AiMockServerRouteImport.update({
+  id: '/ai/mock-server',
+  path: '/ai/mock-server',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiDocsGenRoute = AiDocsGenRouteImport.update({
+  id: '/ai/docs-gen',
+  path: '/ai/docs-gen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai/docs-gen': typeof AiDocsGenRoute
+  '/ai/mock-server': typeof AiMockServerRoute
   '/ai/test-synth': typeof AiTestSynthRoute
   '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai/docs-gen': typeof AiDocsGenRoute
+  '/ai/mock-server': typeof AiMockServerRoute
   '/ai/test-synth': typeof AiTestSynthRoute
   '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai/docs-gen': typeof AiDocsGenRoute
+  '/ai/mock-server': typeof AiMockServerRoute
   '/ai/test-synth': typeof AiTestSynthRoute
   '/module/$slug': typeof ModuleSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai/test-synth' | '/module/$slug'
+  fullPaths:
+    | '/'
+    | '/ai/docs-gen'
+    | '/ai/mock-server'
+    | '/ai/test-synth'
+    | '/module/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai/test-synth' | '/module/$slug'
-  id: '__root__' | '/' | '/ai/test-synth' | '/module/$slug'
+  to:
+    | '/'
+    | '/ai/docs-gen'
+    | '/ai/mock-server'
+    | '/ai/test-synth'
+    | '/module/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai/docs-gen'
+    | '/ai/mock-server'
+    | '/ai/test-synth'
+    | '/module/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiDocsGenRoute: typeof AiDocsGenRoute
+  AiMockServerRoute: typeof AiMockServerRoute
   AiTestSynthRoute: typeof AiTestSynthRoute
   ModuleSlugRoute: typeof ModuleSlugRoute
 }
@@ -82,14 +118,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiTestSynthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai/mock-server': {
+      id: '/ai/mock-server'
+      path: '/ai/mock-server'
+      fullPath: '/ai/mock-server'
+      preLoaderRoute: typeof AiMockServerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/docs-gen': {
+      id: '/ai/docs-gen'
+      path: '/ai/docs-gen'
+      fullPath: '/ai/docs-gen'
+      preLoaderRoute: typeof AiDocsGenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiDocsGenRoute: AiDocsGenRoute,
+  AiMockServerRoute: AiMockServerRoute,
   AiTestSynthRoute: AiTestSynthRoute,
   ModuleSlugRoute: ModuleSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

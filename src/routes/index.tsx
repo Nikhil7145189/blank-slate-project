@@ -409,15 +409,17 @@ function AIPanel({ item, index }: { item: { tag: string; title: string; body: st
           <div className="font-mono text-xs text-signal uppercase tracking-widest mb-4">[ {item.tag} ]</div>
           <h3 className="font-display text-4xl md:text-6xl uppercase tracking-tight leading-[0.9] mb-6">{item.title}</h3>
           <p className="text-bone/60 text-lg leading-relaxed max-w-md">{item.body}</p>
-          {item.tag === "AI.TESTS" ? (
-            <Link to="/ai/test-synth" className="mt-8 inline-block font-mono text-xs text-acid uppercase tracking-widest border-b border-acid pb-1 hover:text-signal hover:border-signal transition">
-              initiate →
-            </Link>
-          ) : (
-            <button className="mt-8 font-mono text-xs text-acid uppercase tracking-widest border-b border-acid pb-1 hover:text-bone hover:border-bone transition">
-              initiate →
-            </button>
-          )}
+          {(() => {
+            const to =
+              item.tag === "AI.TESTS" ? "/ai/test-synth"
+              : item.tag === "AI.DOCS" ? "/ai/docs-gen"
+              : "/ai/mock-server";
+            return (
+              <Link to={to} className="mt-8 inline-block font-mono text-xs text-acid uppercase tracking-widest border-b border-acid pb-1 hover:text-signal hover:border-signal transition">
+                initiate →
+              </Link>
+            );
+          })()}
         </div>
         <div className="relative aspect-square border border-border bg-background p-6 overflow-hidden">
           <div className="absolute inset-0 grid-bg opacity-40" />
