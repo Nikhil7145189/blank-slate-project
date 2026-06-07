@@ -52,7 +52,7 @@ function Index() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <div ref={containerRef} className="relative bg-background text-foreground">
+    <div ref={containerRef} className="relative bg-transparent text-foreground">
       {/* TOP RAIL */}
       <header className="fixed top-0 inset-x-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-xl">
         <div className="flex items-center justify-between px-6 py-3 font-mono text-xs tracking-widest uppercase">
