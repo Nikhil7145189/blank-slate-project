@@ -284,8 +284,8 @@ function Index() {
   );
 }
 
-function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo"; onClose: () => void }) {
-  const config = {
+function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo" | "github" | "jenkins" | "postman" | "swagger"; onClose: () => void }) {
+  const actionConfig = {
     deploy: {
       tag: "[ agent.deploy ]",
       title: "Deploy Edge Agent",
@@ -323,6 +323,61 @@ function ActionModal({ kind, onClose }: { kind: null | "deploy" | "scan" | "demo
       accent: "var(--signal)",
     },
   } as const;
+
+  const integrationConfig: Record<string, { tag: string; title: string; desc: string; meta: { label: string; value: string }[]; actions: string[]; accent: string }> = {
+    github: {
+      tag: "[ repo.bridge ]",
+      title: "GitHub Integration",
+      desc: "Auto-pull OpenAPI specs from PRs. Wire GitHub Actions for CI security gates. Annotate commits with scan results.",
+      meta: [
+        { label: "connection", value: "● authenticated" },
+        { label: "repos.synced", value: "3" },
+        { label: "webhooks", value: "push, pull_request" },
+        { label: "last.payload", value: "2m ago" },
+      ],
+      actions: ["sync_repos()", "view_actions_logs()", "configure_webhook()"],
+      accent: "var(--acid)",
+    },
+    jenkins: {
+      tag: "[ ci.bridge ]",
+      title: "Jenkins Integration",
+      desc: "Trigger security scans from build pipelines. Ingest test results. Fail builds on critical findings before they reach staging.",
+      meta: [
+        { label: "connection", value: "● authenticated" },
+        { label: "jobs.wired", value: "7" },
+        { label: "build.trigger", value: "post-build step" },
+        { label: "last.run", value: "#892 — passed" },
+      ],
+      actions: ["add_build_step()", "view_pipeline()", "configure_node()"],
+      accent: "var(--warn)",
+    },
+    postman: {
+      tag: "[ collection.bridge ]",
+      title: "Postman Integration",
+      desc: "Import collections, environments and test suites. Sync changes bidirectionally. Export generated tests back to Postman.",
+      meta: [
+        { label: "connection", value: "● authenticated" },
+        { label: "collections", value: "12 imported" },
+        { label: "env.vars", value: "47 synced" },
+        { label: "last.sync", value: "14m ago" },
+      ],
+      actions: ["import_collection()", "sync_environment()", "export_tests()"],
+      accent: "var(--signal)",
+    },
+    swagger: {
+      tag: "[ spec.bridge ]",
+      title: "Swagger / OpenAPI",
+      desc: "Ingest Swagger 2.0 and OpenAPI 3.x specs. Auto-detect drift between documented and deployed contracts.",
+      meta: [
+        { label: "connection", value: "● polling" },
+        { label: "specs.tracked", value: "8" },
+        { label: "format", value: "openapi 3.0.3" },
+        { label: "last.diff", value: "1 finding" },
+      ],
+      actions: ["upload_spec()", "run_diff()", "generate_client()"],
+      accent: "var(--acid)",
+    },
+  };
 
   return (
     <AnimatePresence>
