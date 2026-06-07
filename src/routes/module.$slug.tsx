@@ -468,7 +468,7 @@ function ModulePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1 }}
-              className="bg-card p-8 group hover:bg-bone/[0.02] transition-colors"
+              className="bg-card/40 backdrop-blur-xl p-8 group hover:bg-bone/[0.02] transition-colors"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="font-mono text-xs text-bone/40">CAP.{String(i + 1).padStart(2, "0")}</div>
