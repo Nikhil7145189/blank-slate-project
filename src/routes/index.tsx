@@ -245,7 +245,7 @@ function Index() {
                 <button
                   key={b + k}
                   onClick={() => clickable && setModal(kindMap[b])}
-                  className={`text-bone/20 hover:text-acid transition-colors flex items-center gap-16 ${clickable ? "cursor-pointer" : "cursor-default"}`}
+                  className={`text-bone/20 hover:text-acid transition-colors flex items-center gap-16 bg-transparent border-none p-0 m-0 font-display ${clickable ? "cursor-pointer" : "cursor-default"}`}
                 >
                   {b} <span className="text-acid/40">/</span>
                 </button>
