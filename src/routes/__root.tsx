@@ -106,13 +106,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: ReactNode }) {
+function GlassShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="relative">
+        {/* ambient glass background layer */}
+        <div className="fixed inset-0 -z-10 bg-background" />
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute top-[-20%] left-[-10%] h-[60vh] w-[60vw] rounded-full bg-acid/10 blur-[120px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] h-[60vh] w-[60vw] rounded-full bg-signal/10 blur-[120px]" />
+          <div className="absolute top-[40%] left-[30%] h-[40vh] w-[40vw] rounded-full bg-warn/5 blur-[100px]" />
+        </div>
         {children}
         <Scripts />
       </body>
